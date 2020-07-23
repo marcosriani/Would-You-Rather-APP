@@ -1,6 +1,7 @@
 .authenticate-container {
   width: 50%;
-  margin: 100px auto 0;
+  max-width: 500px;
+  margin: 120px auto 0;
   border: 1px solid rgb(214, 213, 213);
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Authenticate from './Authenticate';
+import DashBoard from './Dashboard';
 import { connect } from 'react-redux';
 import { getUsers } from '../actions/users';
 
@@ -15,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Authenticate />
+        <DashBoard />
       </div>
     );
   }

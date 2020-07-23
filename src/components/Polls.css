@@ -1,0 +1,36 @@
+.polls {
+  border: 1px solid rgb(161, 161, 161);
+  border-top: none;
+  max-width: 550px;
+  margin: 0 auto;
+  /* background-color: green; */
+  margin-top: 30px;
+  border-radius: 5px;
+}
+
+.polls-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+}
+
+.polls-buttons .btn-1,
+.polls-buttons .btn-2 {
+  border: none;
+  height: 55px;
+}
+
+.polls-buttons .btn-1 {
+  border-right: 1px solid rgb(161, 161, 161);
+  border-top: 1px solid rgb(161, 161, 161);
+  border-bottom: 1px solid white;
+  border-top-right-radius: 4px;
+  background-color: white;
+}
+.polls-buttons .btn-2 {
+  border-left: 1px solid rgb(161, 161, 161);
+  border-bottom: 1px solid rgb(161, 161, 161);
+  border-top: 1px solid rgb(206, 205, 205);
+
+  border-top-left-radius: 4px;
+}

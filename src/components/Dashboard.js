@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import Pools from './Pools';
 
 class Dashboard extends Component {
   render() {
-    return <div>Dashboard</div>;
+    return (
+      <div>
+        <Pools />
+      </div>
+    );
   }
 }
 

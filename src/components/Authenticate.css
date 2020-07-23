@@ -54,16 +54,16 @@
 }
 
 .authenticate-form label,
-.authenticate-form select {
+.authenticate-Select {
   margin-bottom: 20px;
 }
 
-.authenticate-form select,
+.authenticate-Select,
 .authenticate-form button {
   padding: 6px;
 }
 
-.authenticate-form select {
+.authenticate-Select {
   border: 1px solid rgba(233, 231, 231, 0.473);
   border-radius: 4px;
 }

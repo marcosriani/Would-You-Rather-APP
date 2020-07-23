@@ -10,9 +10,7 @@ export const receiveUsers = (users) => ({
 });
 
 // Asynchronous action creator
-export const getUsers = () => (dispatch) => {
-  return _getUsers().then((data) => {
-    console.log(data);
-    dispatch(receiveUsers(data));
-  });
+export const getUsers = () => async (dispatch) => {
+  const result = await _getUsers();
+  dispatch(receiveUsers(result));
 };

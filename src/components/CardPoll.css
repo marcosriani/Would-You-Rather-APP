@@ -5,12 +5,15 @@
 .card-poll-header {
   padding: 5px;
   border: 1px solid rgb(228, 227, 227);
-  border-right: 1px solid rgba(33, 95, 21, 0.863);
-  border-top: 2px solid rgba(33, 95, 21, 0.863);
+  border-right: 1px solid rgba(43, 190, 13, 0.863);
+  border-top: 1px solid rgba(43, 190, 13, 0.863);
   margin: 20px 10px 0 10px;
   padding: 15px;
   background-color: rgb(245, 243, 243);
   border-top-right-radius: 25px;
+  -webkit-box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);
+  -moz-box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);
+  box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);
 }
 
 .card-poll-info {

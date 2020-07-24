@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Authenticate from './Authenticate';
 import NewPoll from './NewPoll';
-import DashBoard from './Dashboard';
+import PollsDashboard from './PollsDashboard';
 import { connect } from 'react-redux';
 import { getUsers } from '../actions/users';
+import { handleInitialData } from '../actions/questions';
 
 // CSS
 import './Reset.css';
@@ -12,12 +13,14 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     this.props.getUsers();
+    // Todo: check if the code bellow should stay where it is.
+    this.props.handleInitialData();
   }
 
   render() {
     return (
       <div>
-        <NewPoll />
+        <PollsDashboard />
       </div>
     );
   }
@@ -27,4 +30,7 @@ class App extends Component {
 
 // }
 
-export default connect(null, { getUsers })(App);
+export default connect(null, {
+  getUsers,
+  handleInitialData,
+})(App);

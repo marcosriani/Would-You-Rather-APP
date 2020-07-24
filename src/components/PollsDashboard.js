@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import CardPoll from './CardPoll';
+import { connect } from 'react-redux';
 
-import './Polls.css';
+import './PollsDashboard.css';
 
-class Polls extends Component {
+class PollsDashboard extends Component {
   render() {
+    console.log(this.props.questions);
+
+    const { questions } = this.props.questions;
+
     return (
-      <div className='polls'>
+      <div className='polls-dashboard'>
         <div className='polls-buttons'>
           <button className='btn-1'>Unanswered</button>
           <button className='btn-2'>Answered</button>
@@ -38,4 +43,11 @@ class Polls extends Component {
   }
 }
 
-export default Polls;
+const mapStateToProps = ({ questions }) => {
+  // Convert the object users into an array of objects
+  const allUsers = Object.values(questions);
+
+  return { questions: allUsers };
+};
+
+export default connect(mapStateToProps)(PollsDashboard);

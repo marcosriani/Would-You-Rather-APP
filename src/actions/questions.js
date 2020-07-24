@@ -12,7 +12,7 @@ export const receiveQuestions = (questions) => ({
 });
 
 // Asynchronous action creator
-const handleInitialData = () => async (dispatch) => {
+export const handleInitialData = () => async (dispatch) => {
   const response = await _getQuestions();
   dispatch(receiveQuestions(response));
 };

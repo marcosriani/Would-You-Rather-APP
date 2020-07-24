@@ -5,10 +5,25 @@ import { connect } from 'react-redux';
 import './PollsDashboard.css';
 
 class PollsDashboard extends Component {
-  render() {
-    console.log(this.props.questions);
+  formatQuestionsArray = (questionsArray, usersArray) => {
+    const newArray = [];
 
-    const { questions } = this.props.questions;
+    for (const questionObj of questionsArray) {
+      newArray.push({
+        id: questionObj.id,
+        username: questionObj.author,
+        question: questionObj.optionOne.text,
+        imgUrl: usersArray[questionObj.author].avatarURL,
+      });
+    }
+
+    return newArray;
+  };
+
+  render() {
+    // console.log(this.props);
+
+    const { questions, users } = this.props;
 
     return (
       <div className='polls-dashboard'>
@@ -17,37 +32,25 @@ class PollsDashboard extends Component {
           <button className='btn-2'>Answered</button>
         </div>
         <div>
-          <CardPoll
-            username='Martha'
-            question='Question  asdhf halksjdf  ahsd...'
-            imgUrl='./avatar1.png'
-          />
-          <CardPoll
-            username='Marcos'
-            question='Question  asdhf halksjdf  ahsd...'
-            imgUrl='./avatar2.png'
-          />
-          <CardPoll
-            username='Marcelo'
-            question='Question  asdhf halksjdf  ahsd...'
-            imgUrl='./avatar3.png'
-          />
-          <CardPoll
-            username='Martha'
-            question='Question  asdhf halksjdf  ahsd...'
-            imgUrl='./avatar1.png'
-          />
+          {this.formatQuestionsArray(questions, users).map((item) => (
+            <CardPoll
+              key={item.id}
+              username={item.username}
+              question={item.question}
+              imgUrl={item.imgUrl}
+            />
+          ))}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ questions }) => {
+const mapStateToProps = ({ users, questions }) => {
   // Convert the object users into an array of objects
-  const allUsers = Object.values(questions);
+  const allQuestions = Object.values(questions);
 
-  return { questions: allUsers };
+  return { users, questions: allQuestions };
 };
 
 export default connect(mapStateToProps)(PollsDashboard);

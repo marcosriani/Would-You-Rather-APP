@@ -13,7 +13,7 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     this.props.getUsers();
-    // Todo: check if the code bellow should stay where it is.
+    // Todo: check if the code bellow should stay where it
     this.props.handleInitialData();
   }
 

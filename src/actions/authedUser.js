@@ -2,7 +2,7 @@
 export const SET_AUTHED_USER = 'SET_AUTHED_USER';
 
 // Action creator
-export const setAuthedUser = (id) => ({
+export const setAuthedUser = (authedUser) => ({
   type: SET_AUTHED_USER,
-  id,
+  authedUser,
 });

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './PollsDashboard.css';
 
 class PollsDashboard extends Component {
-  formatQuestionsArray = (questionsArray, usersArray) => {
+  formatQuestionsArray = (questionsArray, usersObj) => {
     const newArray = [];
 
     for (const questionObj of questionsArray) {
@@ -13,7 +13,7 @@ class PollsDashboard extends Component {
         id: questionObj.id,
         username: questionObj.author,
         question: questionObj.optionOne.text,
-        imgUrl: usersArray[questionObj.author].avatarURL,
+        imgUrl: usersObj[questionObj.author].avatarURL,
       });
     }
 
@@ -21,9 +21,7 @@ class PollsDashboard extends Component {
   };
 
   render() {
-    // console.log(this.props);
-
-    const { questions, users } = this.props;
+    const { questions, users, authedUser } = this.props;
 
     return (
       <div className='polls-dashboard'>
@@ -38,6 +36,7 @@ class PollsDashboard extends Component {
               username={item.username}
               question={item.question}
               imgUrl={item.imgUrl}
+              value={authedUser}
             />
           ))}
         </div>
@@ -46,11 +45,11 @@ class PollsDashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ users, questions }) => {
+const mapStateToProps = ({ users, questions, authedUser }) => {
   // Convert the object users into an array of objects
   const allQuestions = Object.values(questions);
 
-  return { users, questions: allQuestions };
+  return { users, questions: allQuestions, authedUser };
 };
 
 export default connect(mapStateToProps)(PollsDashboard);

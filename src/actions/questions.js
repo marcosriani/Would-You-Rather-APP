@@ -1,5 +1,4 @@
 import { _getQuestions } from '../utils/_DATA';
-import { receiveUsers } from './users';
 
 // Action type
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';

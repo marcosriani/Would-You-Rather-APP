@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
+import { setAuthedUser } from '../actions/authedUser';
 
 // CSS
 import './Authenticate.css';
 
 class Authenticate extends Component {
+  seletedUser = (e, { value }) => {
+    e.preventDefault();
+
+    this.props.setAuthedUser(value);
+
+    this.setState(() => {
+      return {
+        username: this.props.users.find((user) => user.id === value).name,
+      };
+    });
+  };
+
   // Format the users array to a format supported by the sematic ui dropdown
   formatUsersArray = (usersArray) => {
     const newArray = [];
@@ -13,6 +26,7 @@ class Authenticate extends Component {
     for (const userObj of usersArray) {
       newArray.push({
         key: userObj.id,
+        id: userObj.id,
         text: userObj.name,
         value: userObj.id,
         image: {
@@ -25,18 +39,24 @@ class Authenticate extends Component {
     return newArray;
   };
 
+  loginUser = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
   render() {
-    // console.log(this.props.users);
-    const { users } = this.props;
+    // console.log(this.state.username);
+    const { users, authedUser } = this.props;
 
     // Dropdown selection function form the semantic ui
     const DropdownSelection = (friendOptions) => (
       <Dropdown
-        placeholder='Select Mate'
+        placeholder='Select an User'
         fluid
         selection
         options={friendOptions}
         className='authenticate-Select'
+        onChange={this.seletedUser}
       />
     );
 
@@ -53,12 +73,16 @@ class Authenticate extends Component {
             alt='wallpaper'
           />
         </div>
-        <form className='authenticate-form'>
+        <form className='authenticate-form' onSubmit={this.loginUser}>
           <label>To Sign In choose an User</label>
           {/* Dropdown with icon - from semantic UI */}
           {DropdownSelection(this.formatUsersArray(users))}
 
-          <button type='submit' className='authenticate-btn'>
+          <button
+            type='submit'
+            className='authenticate-btn'
+            disabled={authedUser === null ? true : false}
+          >
             Login
           </button>
         </form>
@@ -67,11 +91,11 @@ class Authenticate extends Component {
   }
 }
 
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users, authedUser }) => {
   // Convert the object users into an array of objects
   const allUsers = Object.values(users);
 
-  return { users: allUsers };
+  return { users: allUsers, authedUser };
 };
 
-export default connect(mapStateToProps)(Authenticate);
+export default connect(mapStateToProps, { setAuthedUser })(Authenticate);

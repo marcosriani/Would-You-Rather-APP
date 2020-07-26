@@ -14,23 +14,25 @@
   margin: 0;
 }
 
-.polls-buttons .btn-1,
-.polls-buttons .btn-2 {
-  border: none;
+.activeBtn,
+.disabledBtn {
   height: 55px;
-}
-
-.polls-buttons .btn-1 {
-  border-right: 1px solid rgb(161, 161, 161);
+  outline: none;
   border-top: 1px solid rgb(161, 161, 161);
-  border-bottom: 1px solid white;
-  border-top-right-radius: 4px;
-  background-color: white;
-}
-.polls-buttons .btn-2 {
-  border-left: 1px solid rgb(161, 161, 161);
-  border-bottom: 1px solid rgb(161, 161, 161);
-  border-top: 1px solid rgb(206, 205, 205);
-
   border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-left: none;
+  border-right: none;
+}
+
+.activeBtn {
+  background-color: white;
+  border-bottom: none;
+  border-left: 1px solid rgb(223, 223, 223);
+  border-right: 1px solid rgb(223, 223, 223);
+}
+
+.disabledBtn {
+  background-color: rgb(231, 231, 231);
+  border-bottom: 1px solid rgb(223, 223, 223);
 }

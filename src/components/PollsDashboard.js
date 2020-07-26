@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import './PollsDashboard.css';
 
 class PollsDashboard extends Component {
+  state = {
+    buttonClicked: 'unanswered',
+  };
+
   formatQuestionsArray = (questionsArray, usersObj) => {
     const newArray = [];
 
@@ -21,16 +25,49 @@ class PollsDashboard extends Component {
   };
 
   render() {
-    const { questions, users, authedUser } = this.props;
+    const {
+      questions,
+      users,
+      authedUser,
+      answeredQuestions,
+      unansweredQuestions,
+    } = this.props;
 
     return (
       <div className='polls-dashboard'>
         <div className='polls-buttons'>
-          <button className='btn-1'>Unanswered</button>
-          <button className='btn-2'>Answered</button>
+          <button
+            onClick={() => {
+              this.setState({ buttonClicked: 'unanswered' });
+            }}
+            className={
+              this.state.buttonClicked === 'unanswered'
+                ? 'activeBtn'
+                : 'disabledBtn'
+            }
+          >
+            Unanswered
+          </button>
+          <button
+            onClick={() => {
+              this.setState({ buttonClicked: 'answered' });
+            }}
+            className={
+              this.state.buttonClicked === 'answered'
+                ? 'activeBtn'
+                : 'disabledBtn'
+            }
+          >
+            Answered
+          </button>
         </div>
         <div>
-          {this.formatQuestionsArray(questions, users).map((item) => (
+          {this.formatQuestionsArray(
+            this.state.buttonClicked === 'unanswered'
+              ? unansweredQuestions
+              : answeredQuestions,
+            users
+          ).map((item) => (
             <CardPoll
               key={item.id}
               username={item.username}
@@ -48,13 +85,11 @@ class PollsDashboard extends Component {
 const mapStateToProps = ({ users, questions, authedUser }) => {
   // Convert the object users into an array of objects
   const allQuestions = Object.values(questions);
-
-  // Get the user questions
-
   const newArrayQuestions = [...allQuestions];
-  const answeredQuestions = [];
 
   // Answered question
+  const answeredQuestions = [];
+
   newArrayQuestions.forEach((question) => {
     if (
       question.optionOne.votes.find((item) => {
@@ -65,11 +100,11 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
       }) !== authedUser
     ) {
       answeredQuestions.push(question);
-      return question;
     }
   });
 
-  const answeredQuestion = [];
+  // Unanswered question
+  const unansweredQuestions = [];
 
   newArrayQuestions.forEach((question) => {
     if (
@@ -80,14 +115,17 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
         return item === authedUser;
       }) === authedUser
     ) {
-      answeredQuestion.push(question);
-      return question;
+      unansweredQuestions.push(question);
     }
   });
 
-  console.log(answeredQuestion);
-
-  return { users, questions: allQuestions, authedUser, answeredQuestions };
+  return {
+    users,
+    questions: allQuestions,
+    authedUser,
+    answeredQuestions,
+    unansweredQuestions,
+  };
 };
 
 export default connect(mapStateToProps)(PollsDashboard);

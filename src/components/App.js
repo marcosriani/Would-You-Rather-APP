@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Authenticate from './Authenticate';
 import NewPoll from './NewPoll';
 import PollsDashboard from './PollsDashboard';
+import Nav from './Nav';
 import { connect } from 'react-redux';
 import { getUsers } from '../actions/users';
 import { handleInitialData } from '../actions/questions';
@@ -19,9 +21,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <PollsDashboard />
-      </div>
+      <Router>
+        <div>
+          <Nav />
+        </div>
+        <div>
+          <Route path='/' exact component={Authenticate} />
+          <Route path='/home' component={PollsDashboard} />
+        </div>
+      </Router>
     );
   }
 }

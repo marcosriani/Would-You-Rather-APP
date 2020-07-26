@@ -83,6 +83,7 @@ class PollsDashboard extends Component {
 }
 
 const mapStateToProps = ({ users, questions, authedUser }) => {
+  console.log(authedUser);
   // Convert the object users into an array of objects
   const allQuestions = Object.values(questions);
   const newArrayQuestions = [...allQuestions];

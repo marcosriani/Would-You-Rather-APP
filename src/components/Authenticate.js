@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import { setAuthedUser } from '../actions/authedUser';
-
+import { withRouter } from 'react-router-dom';
 // CSS
 import './Authenticate.css';
 
@@ -41,6 +41,7 @@ class Authenticate extends Component {
 
   loginUser = (e) => {
     e.preventDefault();
+    this.props.history.push(`/home`);
   };
 
   render() {
@@ -101,4 +102,6 @@ const mapStateToProps = ({ users, authedUser }) => {
   return { users: allUsers, authedUser };
 };
 
-export default connect(mapStateToProps, { setAuthedUser })(Authenticate);
+export default withRouter(
+  connect(mapStateToProps, { setAuthedUser })(Authenticate)
+);

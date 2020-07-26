@@ -49,7 +49,45 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
   // Convert the object users into an array of objects
   const allQuestions = Object.values(questions);
 
-  return { users, questions: allQuestions, authedUser };
+  // Get the user questions
+
+  const newArrayQuestions = [...allQuestions];
+  const answeredQuestions = [];
+
+  // Answered question
+  newArrayQuestions.forEach((question) => {
+    if (
+      question.optionOne.votes.find((item) => {
+        return item === authedUser;
+      }) !== authedUser &&
+      question.optionTwo.votes.find((item) => {
+        return item === authedUser;
+      }) !== authedUser
+    ) {
+      answeredQuestions.push(question);
+      return question;
+    }
+  });
+
+  const answeredQuestion = [];
+
+  newArrayQuestions.forEach((question) => {
+    if (
+      question.optionOne.votes.find((item) => {
+        return item === authedUser;
+      }) === authedUser ||
+      question.optionTwo.votes.find((item) => {
+        return item === authedUser;
+      }) === authedUser
+    ) {
+      answeredQuestion.push(question);
+      return question;
+    }
+  });
+
+  console.log(answeredQuestion);
+
+  return { users, questions: allQuestions, authedUser, answeredQuestions };
 };
 
 export default connect(mapStateToProps)(PollsDashboard);

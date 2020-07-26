@@ -41,7 +41,6 @@ class Authenticate extends Component {
 
   loginUser = (e) => {
     e.preventDefault();
-    console.log(e.target);
   };
 
   render() {
@@ -80,7 +79,11 @@ class Authenticate extends Component {
 
           <button
             type='submit'
-            className='authenticate-btn'
+            className={`authenticate-btn ${
+              authedUser === null
+                ? 'button-color-disabled'
+                : 'button-color-active '
+            }`}
             disabled={authedUser === null ? true : false}
           >
             Login

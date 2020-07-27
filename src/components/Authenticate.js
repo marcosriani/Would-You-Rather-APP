@@ -7,16 +7,22 @@ import { withRouter } from 'react-router-dom';
 import './Authenticate.css';
 
 class Authenticate extends Component {
+  state = {
+    username: null,
+  };
+
   seletedUser = (e, { value }) => {
     e.preventDefault();
 
-    this.props.setAuthedUser(value);
-
     this.setState(() => {
       return {
-        username: this.props.users.find((user) => user.id === value).name,
+        username: value,
       };
     });
+  };
+
+  onSubmit = () => {
+    this.props.setAuthedUser(this.state.username);
   };
 
   // Format the users array to a format supported by the sematic ui dropdown
@@ -81,11 +87,12 @@ class Authenticate extends Component {
           <button
             type='submit'
             className={`authenticate-btn ${
-              authedUser === null
+              this.state.username === null
                 ? 'button-color-disabled'
                 : 'button-color-active '
             }`}
-            disabled={authedUser === null ? true : false}
+            disabled={this.state.username === null ? true : false}
+            onClick={this.onSubmit}
           >
             Login
           </button>

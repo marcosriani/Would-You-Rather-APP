@@ -28,6 +28,7 @@ class App extends Component {
         <div>
           <Route path='/' exact component={Authenticate} />
           <Route path='/home' component={PollsDashboard} />
+          <Route path='/newPoll' component={NewPoll} />
         </div>
       </Router>
     );

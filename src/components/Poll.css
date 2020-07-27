@@ -1,0 +1,36 @@
+.poll-wrap {
+  margin: 0 auto;
+  max-width: 550px;
+  border: 1px solid red;
+  margin-top: 30px;
+  padding: 30px;
+}
+
+.poll-data {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.poll-img {
+  justify-self: center;
+  border-right: 1px solid rgb(243, 243, 243);
+  padding: 10px;
+}
+
+.poll-data img {
+  max-width: 125px;
+}
+
+.form-data {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+}
+
+.poll-button-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+
+.poll-button {
+}

@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './CardPoll.css';
 
 class CardPoll extends Component {
+  onClickAnswer = (e) => {
+    e.preventDefault();
+    this.props.history.push(`/poll/${this.props.id}`);
+  };
+
   render() {
     const { username, question, imgUrl } = this.props;
 
@@ -21,7 +28,7 @@ class CardPoll extends Component {
               <p>{question}</p>
             </div>
             <div className='card-poll-btn'>
-              <button>Answer Poll</button>
+              <button onClick={this.onClickAnswer}>Answer Poll</button>
             </div>
           </div>
         </div>
@@ -30,4 +37,12 @@ class CardPoll extends Component {
   }
 }
 
-export default CardPoll;
+const mapStateToProps = ({ users, questions }, onwProps) => {
+  return {
+    username: users[questions[onwProps.id].author].name,
+    question: questions[onwProps.id].optionOne.text,
+    imgUrl: users[questions[onwProps.id].author].avatarURL,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(CardPoll));

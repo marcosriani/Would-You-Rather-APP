@@ -1,0 +1,12 @@
+.error-page-wrapper {
+  padding: 100px;
+  margin: 0 auto;
+  background-color: rgb(240, 240, 240);
+  border: none;
+  font-size: 30px;
+  text-align: center;
+}
+
+.error-page-wrapper img {
+  text-align: center;
+}

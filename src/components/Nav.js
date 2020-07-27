@@ -24,7 +24,11 @@ class Nav extends Component {
             <nav className='nav'>
               <ul className='nav-ul'>
                 <li>
-                  <NavLink to='/' activeClassName='active' className='nav-item'>
+                  <NavLink
+                    to='/home'
+                    activeClassName='active'
+                    className='nav-item'
+                  >
                     Home
                   </NavLink>
                 </li>

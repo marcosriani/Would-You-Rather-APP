@@ -1,14 +1,15 @@
 .nav-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 15px;
-  padding: 25px;
+  grid-template-columns: 2fr 1fr;
+  padding: 20px;
   border-bottom: 2px solid rgb(243, 241, 241);
+  align-items: center;
 }
 
 .nav-ul {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .nav-ul li {
@@ -17,7 +18,7 @@
 
 .nav-item {
   padding: 8px;
-  border: 1px solid rgb(240, 240, 240);
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 50px;
   background-color: rgb(255, 255, 255);
 }
@@ -46,4 +47,26 @@
 
 .avatar-img {
   width: 40px;
+}
+
+.btn-logout {
+  border-radius: 50px;
+  border: none;
+  background-color: rgb(192, 229, 143);
+  color: rgb(71, 19, 19);
+  outline: none;
+}
+
+.btn-logout:hover {
+  background-color: rgb(195, 228, 77);
+}
+
+@media (max-width: 542px) {
+  .nav-item {
+    padding: 0;
+  }
+
+  .nav-ul {
+    flex-direction: column;
+  }
 }

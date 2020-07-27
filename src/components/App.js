@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Authenticate from './Authenticate';
 import NewPoll from './NewPoll';
 import PollsDashboard from './PollsDashboard';
+import Poll from './Poll.js';
 import Nav from './Nav';
 import { connect } from 'react-redux';
 import { getUsers } from '../actions/users';
@@ -28,6 +29,7 @@ class App extends Component {
         <div>
           <Route path='/' exact component={Authenticate} />
           <Route path='/home' component={PollsDashboard} />
+          <Route path='/poll/:id' component={Poll} />
           <Route path='/newPoll' component={NewPoll} />
         </div>
       </Router>

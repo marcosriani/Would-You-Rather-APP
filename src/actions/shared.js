@@ -6,11 +6,12 @@ import { _saveQuestionAnswer } from '../utils/_DATA';
 export const handleAddAnswer = (authedUser, qid, answer) => (dispatch) => {
   console.log(authedUser, qid, answer);
 
-  dispatch(addAnswerToQuestion(authedUser, qid, answer));
   dispatch(addAnswerToUser(authedUser, qid, answer));
-  console.log('hi');
+  dispatch(addAnswerToQuestion(authedUser, qid, answer));
 
-  return _saveQuestionAnswer(authedUser, qid, answer).catch((e) => {
+  console.log(authedUser);
+
+  return _saveQuestionAnswer({ authedUser, qid, answer }).catch((e) => {
     console.warn('An error occurred in handleAddAnswer:', e);
   });
 };

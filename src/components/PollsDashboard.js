@@ -89,8 +89,8 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
   const allQuestions = Object.values(questions);
   const newArrayQuestions = [...allQuestions];
 
-  // Answered question
-  const answeredQuestions = [];
+  //  Unanswered question
+  const unansweredQuestions = [];
 
   newArrayQuestions.forEach((question) => {
     if (
@@ -101,12 +101,12 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
         return item === authedUser;
       }) !== authedUser
     ) {
-      answeredQuestions.push(question);
+      unansweredQuestions.push(question);
     }
   });
 
-  // Unanswered question
-  const unansweredQuestions = [];
+  // Answered question
+  const answeredQuestions = [];
 
   newArrayQuestions.forEach((question) => {
     if (
@@ -117,7 +117,7 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
         return item === authedUser;
       }) === authedUser
     ) {
-      unansweredQuestions.push(question);
+      answeredQuestions.push(question);
     }
   });
 

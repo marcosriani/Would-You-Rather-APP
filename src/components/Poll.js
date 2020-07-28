@@ -20,17 +20,18 @@ class Poll extends Component {
         this.props.id,
         this.state.chosenQuestion
       );
+      this.props.history.push(`/home`);
     }
   };
 
   selectQuestion = (e) => {
     // Update the state every time one of the options are selected.
+
     this.setState({ chosenQuestion: e.target.id });
-    console.log(this.props.id);
   };
 
   render() {
-    const { username, questionOne, questionTwo, imgUrl } = this.props;
+    const { username, optionOne, optionTwo, imgUrl } = this.props;
 
     return (
       <div className='poll-wrap'>
@@ -49,21 +50,21 @@ class Poll extends Component {
               <div>
                 <input
                   type='radio'
-                  id='questionOne'
+                  id='optionOne'
                   name='gender'
-                  value={questionOne}
+                  value={optionOne}
                   className='input-item'
                 />
-                <label htmlFor='questionOne'>{questionOne}</label>
+                <label htmlFor='optionOne'>{optionOne}</label>
                 <br />
                 <input
                   type='radio'
-                  id='questionTwo'
+                  id='optionTwo'
                   name='gender'
-                  value={questionTwo}
+                  value={optionTwo}
                   className='input-item'
                 />
-                <label htmlFor='questionTwo'>{questionTwo}</label>
+                <label htmlFor='optionTwo'>{optionTwo}</label>
               </div>
 
               <div className='poll-button-wrap'>
@@ -87,9 +88,9 @@ const mapStateToProps = ({ users, questions, authedUser }, onwProps) => {
     username:
       Object.entries(questions).length !== 0 &&
       users[questions[id].author].name,
-    questionOne:
+    optionOne:
       Object.entries(questions).length !== 0 && questions[id].optionOne.text,
-    questionTwo:
+    optionTwo:
       Object.entries(questions).length !== 0 && questions[id].optionTwo.text,
     imgUrl:
       Object.entries(questions).length !== 0

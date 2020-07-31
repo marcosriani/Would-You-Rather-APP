@@ -3,6 +3,9 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleAddAnswer } from '../actions/shared';
 
+// To add the progress bar
+import { Progress } from 'semantic-ui-react';
+
 import './PollResult.css';
 
 class Poll extends Component {
@@ -77,7 +80,12 @@ class Poll extends Component {
                   )}
                 </div>
                 <div className='percentage-answer'>
-                  {percentageOptionOne} voted for this answer. <br />
+                  <Progress
+                    percent={percentageOptionOne}
+                    inverted
+                    color='blue'
+                    progress
+                  />
                   That is {votedOptionOne} out of {totalVotes} votes.
                 </div>
                 <div
@@ -97,7 +105,12 @@ class Poll extends Component {
                   )}
                 </div>
                 <div className='percentage-answer'>
-                  {percentageOptionTwo} voted for this answer. <br />
+                  <Progress
+                    percent={percentageOptionTwo}
+                    inverted
+                    color='green'
+                    progress
+                  />
                   That is {votedOptionTwo} out of {totalVotes} votes.
                 </div>
               </div>
@@ -146,12 +159,10 @@ const mapStateToProps = ({ users, questions, authedUser }, onwProps) => {
     // How many answers the question had
     numberOfAnswer = optionOneLength + optionTwoLength;
 
-    percentageOptionOne = `${
-      (optionOneLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100
-    }%`;
-    percentageOptionTwo = `${
-      (optionTwoLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100
-    }%`;
+    percentageOptionOne =
+      (optionOneLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
+    percentageOptionTwo =
+      (optionTwoLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
   }
 
   return {

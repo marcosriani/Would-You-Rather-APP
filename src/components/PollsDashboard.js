@@ -10,7 +10,7 @@ class PollsDashboard extends Component {
     buttonClicked: 'unanswered',
   };
 
-  formatQuestionsArray = (questionsArray, usersObj) => {
+  formatQuestionsArray = (questionsArray, answerCondition, usersObj) => {
     const newArray = [];
 
     for (const questionObj of questionsArray) {
@@ -19,6 +19,7 @@ class PollsDashboard extends Component {
         username: questionObj.author,
         question: questionObj.optionOne.text,
         imgUrl: usersObj[questionObj.author].avatarURL,
+        answerCondition,
       });
     }
 
@@ -27,7 +28,6 @@ class PollsDashboard extends Component {
 
   render() {
     const {
-      questions,
       users,
       authedUser,
       answeredQuestions,
@@ -69,9 +69,17 @@ class PollsDashboard extends Component {
                 this.state.buttonClicked === 'unanswered'
                   ? unansweredQuestions
                   : answeredQuestions,
+                this.state.buttonClicked === 'unanswered'
+                  ? 'unanswered'
+                  : 'answered',
                 users
               ).map((item) => (
-                <CardPoll key={item.id} id={item.id} value={authedUser} />
+                <CardPoll
+                  key={item.id}
+                  id={item.id}
+                  value={authedUser}
+                  answerCondition={item.answerCondition}
+                />
               ))}
             </div>
           </div>
@@ -84,7 +92,6 @@ class PollsDashboard extends Component {
 }
 
 const mapStateToProps = ({ users, questions, authedUser }) => {
-  console.log(authedUser);
   // Convert the object users into an array of objects
   const allQuestions = Object.values(questions);
   const newArrayQuestions = [...allQuestions];

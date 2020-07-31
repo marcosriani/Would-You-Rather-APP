@@ -10,6 +10,7 @@
   border-top: 1px solid rgba(43, 190, 13, 0.863);
   background-color: rgb(245, 243, 243);
   border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   -webkit-box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);
   -moz-box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);
   box-shadow: 1px -1px 3px 0px rgba(12, 242, 58, 1);

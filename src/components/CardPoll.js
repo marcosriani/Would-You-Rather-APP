@@ -7,15 +7,24 @@ import './CardPoll.css';
 class CardPoll extends Component {
   onClickAnswer = (e) => {
     e.preventDefault();
-    this.props.history.push(`/poll/${this.props.id}`);
+    this.props.answerCondition === 'unanswered'
+      ? this.props.history.push(`/poll/${this.props.id}`)
+      : this.props.history.push(`/pollResult/${this.props.id}`);
   };
 
   render() {
-    const { username, question, imgUrl } = this.props;
+    const { username, question, imgUrl, answerCondition } = this.props;
 
     return (
       <div className='card-poll'>
-        <div className='card-poll-header'>
+        <div
+          className={
+            'card-poll-header ' +
+            (answerCondition === 'unanswered'
+              ? 'card-poll-header-unanswered'
+              : 'card-poll-header-answered')
+          }
+        >
           <h3> {username} asked:</h3>
         </div>
         <div className='card-poll-info'>
@@ -42,6 +51,7 @@ const mapStateToProps = ({ users, questions }, onwProps) => {
     username: users[questions[onwProps.id].author].name,
     question: questions[onwProps.id].optionOne.text,
     imgUrl: users[questions[onwProps.id].author].avatarURL,
+    answerCondition: onwProps.answerCondition,
   };
 };
 

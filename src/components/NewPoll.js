@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import './NewPoll.css';
-import ErrorPage from './ErrorPage';
 
 class NewPool extends Component {
   state = {
@@ -26,7 +25,7 @@ class NewPool extends Component {
     this.props.handleAddNewQuestion(
       this.state.answerOne,
       this.state.answerTwo,
-      'sarahedo'
+      this.props.authedUser
     );
     // Go back to /home after submitting new question
     this.props.history.push(`/home`);
@@ -56,7 +55,19 @@ class NewPool extends Component {
                       placeholder='Enter option one...'
                     />
                   </div>
-                  <p>------------------ OR ------------------ </p>
+
+                  {/* If questions are equal, show an warning */}
+                  {this.state.answerOne.length > 1 &&
+                  this.state.answerTwo.length > 1 &&
+                  this.state.answerOne === this.state.answerTwo ? (
+                    <p className='equal-questions'>
+                      Please make sure the two questions are different from each
+                      other.
+                    </p>
+                  ) : (
+                    <p>------------------ OR ------------------ </p>
+                  )}
+
                   <div>
                     <input
                       value={this.state.answerTwo}
@@ -71,7 +82,8 @@ class NewPool extends Component {
                   <button
                     disabled={
                       this.state.answerOne.length < 1 ||
-                      this.state.answerTwo.length < 1
+                      this.state.answerTwo.length < 1 ||
+                      this.state.answerOne === this.state.answerTwo
                         ? true
                         : false
                     }
@@ -90,7 +102,7 @@ class NewPool extends Component {
             </div>
           </div>
         ) : (
-          <ErrorPage />
+          this.props.history.push('/')
         )}
       </Fragment>
     );

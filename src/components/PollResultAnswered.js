@@ -6,10 +6,10 @@ import { handleAddAnswer } from '../actions/shared';
 // To add the progress bar
 import { Progress } from 'semantic-ui-react';
 
-import './PollResult.css';
+import './PollResultAnswered.css';
 import ErrorPage from './ErrorPage';
 
-class Poll extends Component {
+class PollResultAnswered extends Component {
   state = {
     chosenQuestion: '',
   };
@@ -48,6 +48,10 @@ class Poll extends Component {
       totalVotes,
       authedUser,
     } = this.props;
+
+    if (this.props.isWrongID) {
+      return <ErrorPage />;
+    }
 
     return (
       <Fragment>
@@ -157,28 +161,36 @@ const mapStateToProps = ({ users, questions, authedUser }, onwProps) => {
 
   //   To get the logged in user answer
   if (Object.entries(questions).length !== 0) {
-    if (
-      questions[id].optionOne.votes.find((vote) => vote === authedUser) !==
-      undefined
-    ) {
-      voted = 'optionOne';
-    } else if (
-      questions[id].optionTwo.votes.find((vote) => vote === authedUser) !==
-      undefined
-    )
-      voted = 'optionTwo';
+    if (questions[id] !== undefined) {
+      if (
+        questions[id].optionOne.votes.find((vote) => vote === authedUser) !==
+        undefined
+      ) {
+        voted = 'optionOne';
+      } else if (
+        questions[id].optionTwo.votes.find((vote) => vote === authedUser) !==
+        undefined
+      )
+        voted = 'optionTwo';
 
-    //   To get the percentage of each answer
-    optionOneLength = questions[id].optionOne.votes.length;
-    optionTwoLength = questions[id].optionTwo.votes.length;
+      //   To get the percentage of each answer
+      optionOneLength = questions[id].optionOne.votes.length;
+      optionTwoLength = questions[id].optionTwo.votes.length;
 
-    // How many answers the question had
-    numberOfAnswer = optionOneLength + optionTwoLength;
+      // How many answers the question had
+      numberOfAnswer = optionOneLength + optionTwoLength;
 
-    percentageOptionOne =
-      (optionOneLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
-    percentageOptionTwo =
-      (optionTwoLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
+      percentageOptionOne =
+        (optionOneLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
+      percentageOptionTwo =
+        (optionTwoLength / (numberOfAnswer !== 0 && numberOfAnswer)) * 100;
+    }
+  }
+
+  if (questions[id] === undefined) {
+    return {
+      isWrongID: true,
+    };
   }
 
   return {
@@ -205,4 +217,6 @@ const mapStateToProps = ({ users, questions, authedUser }, onwProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { handleAddAnswer })(Poll));
+export default withRouter(
+  connect(mapStateToProps, { handleAddAnswer })(PollResultAnswered)
+);

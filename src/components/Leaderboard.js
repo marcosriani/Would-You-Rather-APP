@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import LeaderboardCard from './LeaderboardCard';
 import { connect } from 'react-redux';
-import ErrorPage from './ErrorPage';
 
 class Leaderboard extends Component {
   render() {
@@ -15,22 +14,20 @@ class Leaderboard extends Component {
     console.log(usersScoreUpdated);
     return (
       <Fragment>
-        {authedUser !== null ? (
-          usersScore.map((result) => {
-            return (
-              <LeaderboardCard
-                key={result.author}
-                user={result.author}
-                img={result.img}
-                answered={result.answeredQuestions}
-                created={result.createdQuestions}
-                winner={result.winner}
-              />
-            );
-          })
-        ) : (
-          <ErrorPage />
-        )}
+        {authedUser !== null
+          ? usersScore.map((result) => {
+              return (
+                <LeaderboardCard
+                  key={result.author}
+                  user={result.author}
+                  img={result.img}
+                  answered={result.answeredQuestions}
+                  created={result.createdQuestions}
+                  winner={result.winner}
+                />
+              );
+            })
+          : this.props.history.push('/')}
       </Fragment>
     );
   }

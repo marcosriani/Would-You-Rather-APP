@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Poll from './Poll';
 
 import './CardPoll.css';
 
 class CardPoll extends Component {
   onClickAnswer = (e) => {
     e.preventDefault();
-    this.props.answerCondition === 'unanswered'
-      ? this.props.history.push(`/poll/${this.props.id}`)
-      : this.props.history.push(`/pollResult/${this.props.id}`);
+    this.props.history.push(`/poll/${this.props.id}`);
   };
 
   render() {

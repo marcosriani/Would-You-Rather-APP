@@ -4,7 +4,6 @@ import Authenticate from './Authenticate';
 import NewPoll from './NewPoll';
 import PollsDashboard from './PollsDashboard';
 import Poll from './Poll.js';
-import PollResult from './PollResult.js';
 import Nav from './Nav';
 import Leaderboard from './Leaderboard';
 import { connect } from 'react-redux';
@@ -32,7 +31,6 @@ class App extends Component {
           <Route path='/' exact component={Authenticate} />
           <Route path='/home' component={PollsDashboard} />
           <Route path='/poll/:id' component={Poll} />{' '}
-          <Route path='/pollResult/:id' component={PollResult} />
           <Route path='/newPoll' component={NewPoll} />
           <Route path='/leaderboard' component={Leaderboard} />
         </div>
@@ -40,10 +38,6 @@ class App extends Component {
     );
   }
 }
-
-// const mapStateToProps = () => {
-
-// }
 
 export default connect(null, {
   getUsers,

@@ -72,3 +72,9 @@
 .new-poll-disabledBtn {
   background-color: rgba(176, 179, 176, 0.863);
 }
+
+.equal-questions {
+  /* padding-top: 20px; */
+  color: red;
+  text-align: center;
+}

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import CardPoll from './CardPoll';
 import { connect } from 'react-redux';
-import ErrorPage from './ErrorPage';
 
 import './PollsDashboard.css';
 
@@ -84,7 +83,7 @@ class PollsDashboard extends Component {
             </div>
           </div>
         ) : (
-          <ErrorPage />
+          this.props.history.push('/')
         )}
       </Fragment>
     );

@@ -1,6 +1,7 @@
 import {
   RECEIVE_QUESTIONS,
   ADD_ANSWER_TO_QUESTION,
+  ADD_NEW_QUESTION_TO_QUESTION,
 } from '../actions/questions';
 
 const questions = (state = {}, action) => {
@@ -9,6 +10,13 @@ const questions = (state = {}, action) => {
       return {
         ...state,
         ...action.questions,
+      };
+    case ADD_NEW_QUESTION_TO_QUESTION:
+      const { question } = action;
+
+      return {
+        ...state,
+        [question.id]: question,
       };
     case ADD_ANSWER_TO_QUESTION:
       const { authedUser, qid, answer } = action;

@@ -1,9 +1,10 @@
 .new-poll-wrapper {
-  border: 1px solid rgb(228, 227, 227);
+  border: 1px solid rgb(241, 241, 241);
   max-width: 550px;
   margin: 30px auto;
   border-radius: 5px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.658);
+  color: rgb(97, 93, 93);
 }
 
 .new-poll-header,
@@ -12,15 +13,18 @@
 }
 
 .new-poll-header {
-  border-bottom: 1px solid rgb(165, 163, 163);
+  border-bottom: 1px solid rgb(241, 241, 241);
   font-weight: 600;
   font-size: 30px;
 }
 
 .new-poll-input input {
-  background-color: rgb(240, 239, 239);
+  background-color: rgb(250, 249, 249);
   height: 35px;
   padding-left: 10px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
 }
 
 .new-poll-input p {
@@ -43,20 +47,28 @@
   font-weight: 600;
 }
 
-.new-poll-questions button {
+.button-submit {
   margin-top: 25px;
   width: 100%;
   padding: 8px;
   border-radius: 5px;
+  background-color: rgba(176, 179, 176, 0.863);
   border: none;
-  background-color: rgba(60, 158, 40, 0.863);
   color: white;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-.new-poll-questions button:hover {
+.new-poll-activeBtn {
+  background-color: rgba(60, 158, 40, 0.863);
+}
+
+.new-poll-activeBtn:hover {
   background-color: rgba(33, 95, 21, 0.863);
   transition-delay: 0.2s;
+}
+
+.new-poll-disabledBtn {
+  background-color: rgba(176, 179, 176, 0.863);
 }

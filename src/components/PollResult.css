@@ -11,8 +11,6 @@
   -webkit-box-shadow: 2px 1px 3px 0px rgb(248, 0, 0);
   -moz-box-shadow: 2px 1px 3px 0px rgb(248, 0, 0);
   box-shadow: 2px 1px 3px 0px rgb(248, 0, 0);
-  display: grid;
-  grid-template-rows: 40px 1fr;
 }
 
 .poll-wrap-result .header {
@@ -67,7 +65,7 @@
 }
 
 .icon-img {
-  border-left: 1px solid rgb(179, 255, 0);
+  border-left: 3px solid rgba(161, 224, 12, 0.445);
 }
 
 .vote-img {
@@ -96,6 +94,8 @@
   border-radius: 5px;
   background-color: white;
   align-items: center;
+  display: grid;
+  grid-template-rows: 40px 1fr;
 }
 
 .poll-wrap-result .optionOne {

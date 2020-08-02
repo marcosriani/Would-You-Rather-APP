@@ -81,7 +81,7 @@ class Poll extends Component {
                 </div>
                 <div className='percentage-answer'>
                   <Progress
-                    percent={percentageOptionOne}
+                    percent={Math.floor(percentageOptionOne)}
                     inverted
                     color='blue'
                     progress
@@ -106,7 +106,7 @@ class Poll extends Component {
                 </div>
                 <div className='percentage-answer'>
                   <Progress
-                    percent={percentageOptionTwo}
+                    percent={Math.floor(percentageOptionTwo)}
                     inverted
                     color='green'
                     progress

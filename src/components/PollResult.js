@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleAddAnswer } from '../actions/shared';
@@ -7,6 +7,7 @@ import { handleAddAnswer } from '../actions/shared';
 import { Progress } from 'semantic-ui-react';
 
 import './PollResult.css';
+import ErrorPage from './ErrorPage';
 
 class Poll extends Component {
   state = {
@@ -45,87 +46,102 @@ class Poll extends Component {
       votedOptionOne,
       votedOptionTwo,
       totalVotes,
+      authedUser,
     } = this.props;
 
     return (
-      <div className='poll-wrap-result'>
-        <div className='header'>
-          <h3> {username} asked:</h3>
-        </div>
-        <div className='poll-data-result'>
-          <div className='poll-img-result'>
-            <img src={imgUrl.slice(1)} alt={`${username} avatar`} />
-          </div>
-          <div className='poll-info-result'>
-            <div>
-              <h3>Results:</h3>
-              <h4>Would you rather</h4>
+      <Fragment>
+        {authedUser !== null ? (
+          <div className='poll-wrap-result'>
+            <div className='header'>
+              <h3> {username} asked:</h3>
+            </div>
+            <div className='poll-data-result'>
+              <div className='poll-img-result'>
+                <img src={imgUrl.slice(1)} alt={`${username} avatar`} />
+              </div>
+              <div className='poll-info-result'>
+                <div>
+                  <h3>Results:</h3>
+                  <h4>Would you rather</h4>
 
-              <div className='options'>
-                <div
-                  className={
-                    voted === 'optionOne'
-                      ? 'optionOne-grid optionOne'
-                      : 'optionOne'
-                  }
-                >
-                  <div className='optionOne-text'>
-                    <p>{optionOne}</p>
-                  </div>
+                  <div className='options'>
+                    <div
+                      className={
+                        voted === 'optionOne'
+                          ? 'optionOne-grid optionOne'
+                          : 'optionOne'
+                      }
+                    >
+                      <div className='optionOne-text'>
+                        <p>{optionOne}</p>
+                      </div>
 
-                  {voted === 'optionOne' && (
-                    <div className='icon-img'>
-                      <img alt='vote' className='vote-img' src='/vote.png' />
+                      {voted === 'optionOne' && (
+                        <div className='icon-img'>
+                          <img
+                            alt='vote'
+                            className='vote-img'
+                            src='/vote.png'
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className='percentage-answer'>
-                  <Progress
-                    percent={Math.floor(percentageOptionOne)}
-                    inverted
-                    color='blue'
-                    progress
-                  />
-                  That is {votedOptionOne} out of {totalVotes} votes.
-                </div>
-                <div
-                  className={
-                    voted === 'optionTwo'
-                      ? 'optionTwo-grid optionTwo'
-                      : 'optionTwo'
-                  }
-                >
-                  <div className='optionTwo-text'>
-                    <p>{optionTwo}</p>
+                    <div className='percentage-answer'>
+                      <Progress
+                        percent={Math.floor(percentageOptionOne)}
+                        inverted
+                        color='blue'
+                        progress
+                      />
+                      That is {votedOptionOne} out of {totalVotes} votes.
+                    </div>
+                    <div
+                      className={
+                        voted === 'optionTwo'
+                          ? 'optionTwo-grid optionTwo'
+                          : 'optionTwo'
+                      }
+                    >
+                      <div className='optionTwo-text'>
+                        <p>{optionTwo}</p>
+                      </div>
+                      {voted === 'optionTwo' && (
+                        <div className='icon-img'>
+                          <img
+                            alt='vote'
+                            className='vote-img'
+                            src='/vote.png'
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className='percentage-answer'>
+                      <Progress
+                        percent={Math.floor(percentageOptionTwo)}
+                        inverted
+                        color='green'
+                        progress
+                      />
+                      That is {votedOptionTwo} out of {totalVotes} votes.
+                    </div>
                   </div>
-                  {voted === 'optionTwo' && (
-                    <div className='icon-img'>
-                      <img alt='vote' className='vote-img' src='/vote.png' />
-                    </div>
-                  )}
                 </div>
-                <div className='percentage-answer'>
-                  <Progress
-                    percent={Math.floor(percentageOptionTwo)}
-                    inverted
-                    color='green'
-                    progress
-                  />
-                  That is {votedOptionTwo} out of {totalVotes} votes.
+
+                <div className='poll-button-wrap-result'>
+                  <Link to='/home'>
+                    <button type='submit' className='poll-button-result'>
+                      Back
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
-
-            <div className='poll-button-wrap-result'>
-              <Link to='/home'>
-                <button type='submit' className='poll-button-result'>
-                  Back
-                </button>
-              </Link>
-            </div>
           </div>
-        </div>
-      </div>
+        ) : (
+          <ErrorPage />
+        )}
+      </Fragment>
     );
   }
 }

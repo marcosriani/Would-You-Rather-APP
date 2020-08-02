@@ -52,7 +52,7 @@ class Authenticate extends Component {
 
   render() {
     // console.log(this.state.username);
-    const { users, authedUser } = this.props;
+    const { users } = this.props;
 
     // Dropdown selection function form the semantic ui
     const DropdownSelection = (friendOptions) => (

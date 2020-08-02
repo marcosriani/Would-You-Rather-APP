@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { handleAddNewQuestion } from '../actions/shared';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import './NewPoll.css';
+import ErrorPage from './ErrorPage';
 
 class NewPool extends Component {
   state = {
@@ -32,58 +33,66 @@ class NewPool extends Component {
   };
 
   render() {
-    return (
-      <div className='new-poll-wrapper'>
-        <div className='new-poll-header'>
-          <h2>Create a New Poll</h2>
-        </div>
-        <div className='new-poll-questions'>
-          <p>Complete the question:</p>
-          <p className='new-poll-q'>Would You Rather...</p>
-          <form onSubmit={this.submitQuestion}>
-            <label></label>
-            <div className='new-poll-input'>
-              <div>
-                <input
-                  value={this.state.answerOne}
-                  onChange={(e) => this.answering(e, 'optionOne')}
-                  type='text'
-                  placeholder='Enter option one...'
-                />
-              </div>
-              <p>------------------ OR ------------------ </p>
-              <div>
-                <input
-                  value={this.state.answerTwo}
-                  onChange={(e) => this.answering(e, 'optionTwo')}
-                  type='text'
-                  placeholder='Enter option two...'
-                />
-              </div>
-            </div>
+    const { authedUser } = this.props;
 
-            {this.state.answerOne !== '' || this.state.answerTwo !== '' ? (
-              <button
-                disabled={
-                  this.state.answerOne.length < 1 ||
-                  this.state.answerTwo.length < 1
-                    ? true
-                    : false
-                }
-                type='submit'
-                className={`button-submit ${
-                  this.state.answerOne.length < 1 ||
-                  this.state.answerTwo.length < 1
-                    ? 'new-poll-disabledBtn'
-                    : 'new-poll-activeBtn'
-                }`}
-              >
-                Submit
-              </button>
-            ) : null}
-          </form>
-        </div>
-      </div>
+    return (
+      <Fragment>
+        {authedUser !== null ? (
+          <div className='new-poll-wrapper'>
+            <div className='new-poll-header'>
+              <h2>Create a New Poll</h2>
+            </div>
+            <div className='new-poll-questions'>
+              <p>Complete the question:</p>
+              <p className='new-poll-q'>Would You Rather...</p>
+              <form onSubmit={this.submitQuestion}>
+                <label></label>
+                <div className='new-poll-input'>
+                  <div>
+                    <input
+                      value={this.state.answerOne}
+                      onChange={(e) => this.answering(e, 'optionOne')}
+                      type='text'
+                      placeholder='Enter option one...'
+                    />
+                  </div>
+                  <p>------------------ OR ------------------ </p>
+                  <div>
+                    <input
+                      value={this.state.answerTwo}
+                      onChange={(e) => this.answering(e, 'optionTwo')}
+                      type='text'
+                      placeholder='Enter option two...'
+                    />
+                  </div>
+                </div>
+
+                {this.state.answerOne !== '' || this.state.answerTwo !== '' ? (
+                  <button
+                    disabled={
+                      this.state.answerOne.length < 1 ||
+                      this.state.answerTwo.length < 1
+                        ? true
+                        : false
+                    }
+                    type='submit'
+                    className={`button-submit ${
+                      this.state.answerOne.length < 1 ||
+                      this.state.answerTwo.length < 1
+                        ? 'new-poll-disabledBtn'
+                        : 'new-poll-activeBtn'
+                    }`}
+                  >
+                    Submit
+                  </button>
+                ) : null}
+              </form>
+            </div>
+          </div>
+        ) : (
+          <ErrorPage />
+        )}
+      </Fragment>
     );
   }
 }

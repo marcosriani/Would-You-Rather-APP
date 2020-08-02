@@ -6,6 +6,7 @@ import PollsDashboard from './PollsDashboard';
 import Poll from './Poll.js';
 import PollResult from './PollResult.js';
 import Nav from './Nav';
+import Leaderboard from './Leaderboard';
 import { connect } from 'react-redux';
 import { getUsers } from '../actions/users';
 import { handleInitialData } from '../actions/questions';
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path='/poll/:id' component={Poll} />{' '}
           <Route path='/pollResult/:id' component={PollResult} />
           <Route path='/newPoll' component={NewPoll} />
+          <Route path='/leaderboard' component={Leaderboard} />
         </div>
       </Router>
     );

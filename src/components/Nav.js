@@ -5,7 +5,6 @@ import { setAuthedUser } from '../actions/authedUser';
 import { withRouter } from 'react-router-dom';
 
 import './Nav.css';
-import { render } from '@testing-library/react';
 
 class Nav extends Component {
   checkout = (e) => {
@@ -42,7 +41,11 @@ class Nav extends Component {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to='/' activeClassName='active' className='nav-item'>
+                  <NavLink
+                    to='/leaderboard'
+                    activeClassName='active'
+                    className='nav-item'
+                  >
                     Leader Board
                   </NavLink>
                 </li>

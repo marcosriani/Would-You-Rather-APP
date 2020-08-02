@@ -1,5 +1,6 @@
 .authenticate-container {
   width: 50%;
+  min-width: 300px;
   max-width: 500px;
   margin: 120px auto 0;
   border: 1px solid rgb(214, 213, 213);

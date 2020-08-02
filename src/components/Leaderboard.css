@@ -14,6 +14,16 @@
   grid-template-columns: 100px 1fr 100px;
 }
 
+.winner {
+  border-left: 1px solid rgba(241, 192, 86, 0.685);
+  border-top: 1px solid rgba(247, 189, 65, 0.685);
+  background-color: rgba(245, 223, 164, 0.432);
+  border-bottom-left-radius: 50px;
+  -webkit-box-shadow: 2px 1px 2px 0px rgba(247, 180, 34, 0.685);
+  -moz-box-shadow: 2px 1px 2px 0px rgba(247, 180, 34, 0.685);
+  box-shadow: 2px 1px 2px 0px rgba(247, 180, 34, 0.685);
+}
+
 .leaderboard-img {
   justify-self: center;
   border-right: 1px solid rgb(221, 236, 243);

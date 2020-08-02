@@ -2,10 +2,14 @@ import React from 'react';
 
 import './Leaderboard.css';
 
-const LeaderboardCard = ({ user, img, answered, created }) => {
+const LeaderboardCard = ({ user, img, answered, created, winner }) => {
   return (
     <div>
-      <div className='leaderboard-container'>
+      <div
+        className={
+          winner ? 'leaderboard-container winner' : 'leaderboard-container '
+        }
+      >
         <div className='leaderboard-img'>
           <img alt='avatar' src={img} />
         </div>
@@ -33,6 +37,12 @@ const LeaderboardCard = ({ user, img, answered, created }) => {
         </div>
         <div className='leaderboard-score'>
           <div className='score-header'>
+            {winner && (
+              <div>
+                <h2>Winner!!!</h2> <hr />
+              </div>
+            )}
+
             <h3>Score</h3>
           </div>
           <div className='score-result'>

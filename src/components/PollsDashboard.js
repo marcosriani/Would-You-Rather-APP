@@ -128,12 +128,21 @@ const mapStateToProps = ({ users, questions, authedUser }) => {
     }
   });
 
+  //use sort to make sure the latest results come up first.
   return {
     users,
     questions: allQuestions,
     authedUser,
-    answeredQuestions,
-    unansweredQuestions,
+    answeredQuestions: answeredQuestions.sort(
+      (a, b) =>
+        (a.timestamp !== undefined || b.timestamp !== undefined) &&
+        b.timestamp - a.timestamp
+    ),
+    unansweredQuestions: unansweredQuestions.sort(
+      (a, b) =>
+        (a.timestamp !== undefined || b.timestamp !== undefined) &&
+        b.timestamp - a.timestamp
+    ),
   };
 };
 

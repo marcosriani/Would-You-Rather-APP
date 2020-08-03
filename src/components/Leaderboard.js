@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import LeaderboardCard from './LeaderboardCard';
 import { connect } from 'react-redux';
 
 class Leaderboard extends Component {
   render() {
-    const { authedUser, usersScore } = this.props;
+    const { usersScore } = this.props;
 
     let usersScoreUpdated = [...usersScore];
     if (usersScoreUpdated[0] !== undefined) {
@@ -12,24 +12,18 @@ class Leaderboard extends Component {
     }
 
     console.log(usersScoreUpdated);
-    return (
-      <Fragment>
-        {authedUser !== null
-          ? usersScore.map((result) => {
-              return (
-                <LeaderboardCard
-                  key={result.author}
-                  user={result.author}
-                  img={result.img}
-                  answered={result.answeredQuestions}
-                  created={result.createdQuestions}
-                  winner={result.winner}
-                />
-              );
-            })
-          : this.props.history.push('/')}
-      </Fragment>
-    );
+    return usersScore.map((result) => {
+      return (
+        <LeaderboardCard
+          key={result.author}
+          user={result.author}
+          img={result.img}
+          answered={result.answeredQuestions}
+          created={result.createdQuestions}
+          winner={result.winner}
+        />
+      );
+    });
   }
 }
 

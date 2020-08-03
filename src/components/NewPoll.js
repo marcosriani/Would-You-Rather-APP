@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { handleAddNewQuestion } from '../actions/shared';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -32,79 +32,71 @@ class NewPool extends Component {
   };
 
   render() {
-    const { authedUser } = this.props;
-
     return (
-      <Fragment>
-        {authedUser !== null ? (
-          <div className='new-poll-wrapper'>
-            <div className='new-poll-header'>
-              <h2>Create a New Poll</h2>
+      <div className='new-poll-wrapper'>
+        <div className='new-poll-header'>
+          <h2>Create a New Poll</h2>
+        </div>
+        <div className='new-poll-questions'>
+          <p>Complete the question:</p>
+          <p className='new-poll-q'>Would You Rather...</p>
+          <form onSubmit={this.submitQuestion}>
+            <label></label>
+            <div className='new-poll-input'>
+              <div>
+                <input
+                  value={this.state.answerOne}
+                  onChange={(e) => this.answering(e, 'optionOne')}
+                  type='text'
+                  placeholder='Enter option one...'
+                />
+              </div>
+
+              {/* If questions are equal, show an warning */}
+              {this.state.answerOne.length > 1 &&
+              this.state.answerTwo.length > 1 &&
+              this.state.answerOne === this.state.answerTwo ? (
+                <p className='equal-questions'>
+                  Please make sure the two questions are different from each
+                  other.
+                </p>
+              ) : (
+                <p>------------------ OR ------------------ </p>
+              )}
+
+              <div>
+                <input
+                  value={this.state.answerTwo}
+                  onChange={(e) => this.answering(e, 'optionTwo')}
+                  type='text'
+                  placeholder='Enter option two...'
+                />
+              </div>
             </div>
-            <div className='new-poll-questions'>
-              <p>Complete the question:</p>
-              <p className='new-poll-q'>Would You Rather...</p>
-              <form onSubmit={this.submitQuestion}>
-                <label></label>
-                <div className='new-poll-input'>
-                  <div>
-                    <input
-                      value={this.state.answerOne}
-                      onChange={(e) => this.answering(e, 'optionOne')}
-                      type='text'
-                      placeholder='Enter option one...'
-                    />
-                  </div>
 
-                  {/* If questions are equal, show an warning */}
-                  {this.state.answerOne.length > 1 &&
-                  this.state.answerTwo.length > 1 &&
-                  this.state.answerOne === this.state.answerTwo ? (
-                    <p className='equal-questions'>
-                      Please make sure the two questions are different from each
-                      other.
-                    </p>
-                  ) : (
-                    <p>------------------ OR ------------------ </p>
-                  )}
-
-                  <div>
-                    <input
-                      value={this.state.answerTwo}
-                      onChange={(e) => this.answering(e, 'optionTwo')}
-                      type='text'
-                      placeholder='Enter option two...'
-                    />
-                  </div>
-                </div>
-
-                {this.state.answerOne !== '' || this.state.answerTwo !== '' ? (
-                  <button
-                    disabled={
-                      this.state.answerOne.length < 1 ||
-                      this.state.answerTwo.length < 1 ||
-                      this.state.answerOne === this.state.answerTwo
-                        ? true
-                        : false
-                    }
-                    type='submit'
-                    className={`button-submit ${
-                      this.state.answerOne.length < 1 ||
-                      this.state.answerTwo.length < 1
-                        ? 'new-poll-disabledBtn'
-                        : 'new-poll-activeBtn'
-                    }`}
-                  >
-                    Submit
-                  </button>
-                ) : null}
-              </form>
-            </div>
-          </div>
-        ) : (
-          this.props.history.push('/')
-        )}
-      </Fragment>
+            {this.state.answerOne !== '' || this.state.answerTwo !== '' ? (
+              <button
+                disabled={
+                  this.state.answerOne.length < 1 ||
+                  this.state.answerTwo.length < 1 ||
+                  this.state.answerOne === this.state.answerTwo
+                    ? true
+                    : false
+                }
+                type='submit'
+                className={`button-submit ${
+                  this.state.answerOne.length < 1 ||
+                  this.state.answerTwo.length < 1
+                    ? 'new-poll-disabledBtn'
+                    : 'new-poll-activeBtn'
+                }`}
+              >
+                Submit
+              </button>
+            ) : null}
+          </form>
+        </div>
+      </div>
     );
   }
 }

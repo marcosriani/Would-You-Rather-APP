@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import CardPoll from './CardPoll';
 import { connect } from 'react-redux';
 
@@ -34,58 +34,52 @@ class PollsDashboard extends Component {
     } = this.props;
 
     return (
-      <Fragment>
-        {authedUser !== null ? (
-          <div className='polls-dashboard'>
-            <div className='polls-buttons'>
-              <button
-                onClick={() => {
-                  this.setState({ buttonClicked: 'unanswered' });
-                }}
-                className={
-                  this.state.buttonClicked === 'unanswered'
-                    ? 'activeBtn'
-                    : 'disabledBtn'
-                }
-              >
-                Unanswered
-              </button>
-              <button
-                onClick={() => {
-                  this.setState({ buttonClicked: 'answered' });
-                }}
-                className={
-                  this.state.buttonClicked === 'answered'
-                    ? 'activeBtn'
-                    : 'disabledBtn'
-                }
-              >
-                Answered
-              </button>
-            </div>
-            <div>
-              {this.formatQuestionsArray(
-                this.state.buttonClicked === 'unanswered'
-                  ? unansweredQuestions
-                  : answeredQuestions,
-                this.state.buttonClicked === 'unanswered'
-                  ? 'unanswered'
-                  : 'answered',
-                users
-              ).map((item) => (
-                <CardPoll
-                  key={item.id}
-                  id={item.id}
-                  value={authedUser}
-                  answerCondition={item.answerCondition}
-                />
-              ))}
-            </div>
-          </div>
-        ) : (
-          this.props.history.push('/')
-        )}
-      </Fragment>
+      <div className='polls-dashboard'>
+        <div className='polls-buttons'>
+          <button
+            onClick={() => {
+              this.setState({ buttonClicked: 'unanswered' });
+            }}
+            className={
+              this.state.buttonClicked === 'unanswered'
+                ? 'activeBtn'
+                : 'disabledBtn'
+            }
+          >
+            Unanswered
+          </button>
+          <button
+            onClick={() => {
+              this.setState({ buttonClicked: 'answered' });
+            }}
+            className={
+              this.state.buttonClicked === 'answered'
+                ? 'activeBtn'
+                : 'disabledBtn'
+            }
+          >
+            Answered
+          </button>
+        </div>
+        <div>
+          {this.formatQuestionsArray(
+            this.state.buttonClicked === 'unanswered'
+              ? unansweredQuestions
+              : answeredQuestions,
+            this.state.buttonClicked === 'unanswered'
+              ? 'unanswered'
+              : 'answered',
+            users
+          ).map((item) => (
+            <CardPoll
+              key={item.id}
+              id={item.id}
+              value={authedUser}
+              answerCondition={item.answerCondition}
+            />
+          ))}
+        </div>
+      </div>
     );
   }
 }

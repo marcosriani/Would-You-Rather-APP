@@ -23,13 +23,18 @@ class App extends Component {
   }
 
   render() {
-    // This component is made to make sure the user is logged in before viewing some pages
     const PrivateRoute = ({ component: Component, ...rest }) => {
       return (
         <Route
           {...rest}
           render={(props) =>
-            this.props.authedUser ? <Component {...props} /> : <ErrorPage />
+            this.props.authedUser ? (
+              <Component {...props} />
+            ) : rest.path === '/poll/:id' ? (
+              <ErrorPage />
+            ) : (
+              <Authenticate />
+            )
           }
         />
       );
